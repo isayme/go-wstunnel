@@ -1,0 +1,8 @@
+github.com/isayme/go-logger v0.1.0 h1:COzyNtpOKo4+t5udyu5Q2vibjbLmSWG06h0SVvtTgiM=
+github.com/isayme/go-logger v0.1.0/go.mod h1:53zvc0cz+ZjVqZgq1Sb4HEEzl/BPjoLA9xKv5L/XvE4=
+github.com/pkg/errors v0.8.1 h1:iURUrRGxPUNPdy5/HRSm+Yj6okJ6UtLINN0Q9M4+h3I=
+github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
+github.com/rs/zerolog v1.12.0 h1:aqZ1XRadoS8IBknR5IDFvGzbHly1X9ApIqOroooQF/c=
+github.com/rs/zerolog v1.12.0/go.mod h1:YbFCdg8HfsridGWAh22vktObvhZbQsZXe4/zB0OKkWU=
+golang.org/x/net v0.0.0-20190301231341-16b79f2e4e95 h1:fY7Dsw114eJN4boqzVSbpVHO6rTdhq6/GnXeu+PKnzU=
+golang.org/x/net v0.0.0-20190301231341-16b79f2e4e95/go.mod h1:mL1N/T3taQHkDXs73rZJwtUhF3w3ftmwwsq0BUmARs4=
