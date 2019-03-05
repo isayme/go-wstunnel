@@ -19,7 +19,7 @@ func Proxy(client, server net.Conn) {
 		_, err := Copy(server, client)
 		if err != nil && !closed {
 			if errors.Cause(err) != io.EOF {
-				logger.Errorf("[%s] Copy from client to server fail, err: %#v", server.RemoteAddr(), err)
+				logger.Errorf("[%s] Copy from client to server fail, err: %s", server.RemoteAddr(), err)
 			}
 		}
 		closed = true
@@ -30,7 +30,7 @@ func Proxy(client, server net.Conn) {
 	_, err := Copy(client, server)
 	if err != nil && !closed {
 		if errors.Cause(err) != io.EOF {
-			logger.Errorf("[%s] Copy from server to client fail, err: %#v", server.RemoteAddr(), err)
+			logger.Errorf("[%s] Copy from server to client fail, err: %s", server.RemoteAddr(), err)
 		}
 	}
 	closed = true

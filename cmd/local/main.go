@@ -77,7 +77,7 @@ func handleConnection(conn net.Conn, wsurl, origin string, timeout time.Duration
 
 	ws, err := websocket.Dial(wsurl, "", origin)
 	if err != nil {
-		logger.Warnw("dial websocket server fail", "url", wsurl)
+		logger.Warnw("dial websocket server fail", "url", wsurl, "err", err)
 		return
 	}
 	defer ws.Close()
