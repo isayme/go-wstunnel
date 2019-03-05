@@ -6,13 +6,13 @@ GIT_REVISION := $(shell git rev-parse HEAD)
 
 .PHONY: build
 build:
-	go build -ldflags "-X ${APP_PKG}/wstunnel/Version=${APP_VERSION} \
-	-X ${APP_PKG}/wstunnel/BuildTime=${BUILD_TIME} \
-	-X ${APP_PKG}/wstunnel/GitRevision=${GIT_REVISION}" \
+	go build -ldflags "-X ${APP_PKG}/wstunnel.Version=${APP_VERSION} \
+	-X ${APP_PKG}/wstunnel.BuildTime=${BUILD_TIME} \
+	-X ${APP_PKG}/wstunnel.GitRevision=${GIT_REVISION}" \
 	-o ./dist/server cmd/server/main.go
-	go build -ldflags "-X ${APP_PKG}/wstunnel/Version=${APP_VERSION} \
-	-X ${APP_PKG}/wstunnel/BuildTime=${BUILD_TIME} \
-	-X ${APP_PKG}/wstunnel/GitRevision=${GIT_REVISION}" \
+	go build -ldflags "-X ${APP_PKG}/wstunnel.Version=${APP_VERSION} \
+	-X ${APP_PKG}/wstunnel.BuildTime=${BUILD_TIME} \
+	-X ${APP_PKG}/wstunnel.GitRevision=${GIT_REVISION}" \
 	-o ./dist/local cmd/local/main.go
 
 .PHONY: image
