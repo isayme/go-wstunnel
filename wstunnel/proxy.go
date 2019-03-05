@@ -23,6 +23,7 @@ func Proxy(client, server net.Conn) {
 			}
 		}
 		closed = true
+		server.Close()
 		logger.Debug("client read end")
 	}()
 
@@ -33,5 +34,6 @@ func Proxy(client, server net.Conn) {
 		}
 	}
 	closed = true
+	client.Close()
 	logger.Debug("remote read end")
 }
