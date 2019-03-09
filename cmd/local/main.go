@@ -66,7 +66,7 @@ func main() {
 			continue
 		}
 
-		handleConnection(conn, *remoteAddress, origin, timeout)
+		go handleConnection(conn, *remoteAddress, origin, timeout)
 	}
 }
 
