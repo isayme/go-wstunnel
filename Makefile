@@ -22,7 +22,6 @@ image:
 
 .PHONY: publish
 publish: image
-	docker tag ${APP_NAME}:${APP_VERSION} isayme/${APP_NAME}:${APP_VERSION}
-	docker push isayme/${APP_NAME}:${APP_VERSION}
-	docker tag ${APP_NAME}:${APP_VERSION} isayme/${APP_NAME}:latest
-	docker push isayme/${APP_NAME}:latest
+	docker push ${APP_NAME}:${APP_VERSION}
+	docker tag ${APP_NAME}:${APP_VERSION} ${APP_NAME}:latest
+	docker push ${APP_NAME}:latest

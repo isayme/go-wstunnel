@@ -70,12 +70,12 @@ func handleWebsocket(targets map[string]string) func(*websocket.Conn) {
 
 		serviceName := getServiceName(ws)
 		if serviceName == "" {
-			logger.Warn("serviceName is empty")
+			logger.Debug("serviceName is empty")
 			return
 		}
 		address := targets[serviceName]
 		if address == "" {
-			logger.Warnf("serviceName(%s) not found", serviceName)
+			logger.Debugf("service(%s) not found", serviceName)
 			return
 		}
 
