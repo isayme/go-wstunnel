@@ -69,10 +69,6 @@ func handleWebsocket(targets map[string]string) func(*websocket.Conn) {
 		defer ws.Close()
 
 		serviceName := getServiceName(ws)
-		if serviceName == "" {
-			logger.Debug("serviceName is empty")
-			return
-		}
 		address := targets[serviceName]
 		if address == "" {
 			logger.Debugf("service(%s) not found", serviceName)
