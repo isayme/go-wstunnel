@@ -1,0 +1,18 @@
+logger:
+  level: debug
+
+server:
+  addr: ':10001'
+
+local:
+  ws_addr: 'ws://ilovechina.isayme.top'
+
+services:
+  - name: ssh
+    timeout: '300s'
+    remote_addr: 'shadowsocks-libev:8388'
+    local_addr: ':8388'
+  - name: shadowsocks
+    timeout: '10s'
+    remote_addr: 'shadowsocks-libev:8388'
+    local_addr: ':8388'

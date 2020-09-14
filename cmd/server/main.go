@@ -9,12 +9,10 @@ import (
 
 	logger "github.com/isayme/go-logger"
 	"github.com/isayme/go-wstunnel/wstunnel"
+	"github.com/isayme/go-wstunnel/wstunnel/conf"
 	"golang.org/x/net/websocket"
 )
 
-var listenAddress = flag.String("listen", ":8388", "listen address")
-var proxyAddress = flag.String("proxy", "", "proxy(remote) address")
-var loggerLevel = flag.String("level", "info", "log level")
 var showHelp = flag.Bool("h", false, "show help")
 var showVersion = flag.Bool("v", false, "show version")
 
@@ -31,16 +29,21 @@ func main() {
 		os.Exit(0)
 	}
 
-	logger.SetLevel(*loggerLevel)
+	config := conf.Get()
+
+	targets := map[string]string{}
+	for _, service := range config.Services {
+		targets[service.Name] = service.RemoteAddress
+	}
 
 	http.Handle("/", websocket.Server{
 		Handshake: handshakeWebsocket,
-		Handler:   handleWebsocket(*proxyAddress),
+		Handler:   handleWebsocket(targets),
 	})
-	// http.Handle("/", websocket.Handler(handleWebsocket(*proxyAddress)))
 
+	listenAddress := config.Server.Addr
 	logger.Debugw("start listen", "address", listenAddress)
-	if err := http.ListenAndServe(*listenAddress, nil); err != nil {
+	if err := http.ListenAndServe(listenAddress, nil); err != nil {
 		logger.Panicw("ListenAndServe fail", "err", err)
 	}
 }
@@ -54,10 +57,27 @@ func handshakeWebsocket(config *websocket.Config, req *http.Request) error {
 	return err
 }
 
-func handleWebsocket(address string) func(*websocket.Conn) {
+// get serviceName from query
+func getServiceName(ws *websocket.Conn) string {
+	URI := ws.Request().URL
+	return URI.Query().Get("serviceName")
+}
+
+func handleWebsocket(targets map[string]string) func(*websocket.Conn) {
 	return func(ws *websocket.Conn) {
 		logger.Debugw("new connection", "address", ws.RemoteAddr().String())
 		defer ws.Close()
+
+		serviceName := getServiceName(ws)
+		if serviceName == "" {
+			logger.Warn("serviceName is empty")
+			return
+		}
+		address := targets[serviceName]
+		if address == "" {
+			logger.Warnf("serviceName(%s) not found", serviceName)
+			return
+		}
 
 		conn, err := net.Dial("tcp", address)
 		if err != nil {
