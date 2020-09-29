@@ -13,17 +13,10 @@ import (
 	"golang.org/x/net/websocket"
 )
 
-var showHelp = flag.Bool("h", false, "show help")
 var showVersion = flag.Bool("v", false, "show version")
 
 func main() {
 	flag.Parse()
-
-	if *showHelp {
-		flag.Usage()
-		os.Exit(0)
-	}
-
 	if *showVersion {
 		wstunnel.PrintVersion()
 		os.Exit(0)

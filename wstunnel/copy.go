@@ -4,7 +4,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/isayme/go-wstunnel/wstunnel/bufferpool"
+	"github.com/isayme/go-bufferpool"
 )
 
 var bufSize = os.Getpagesize()

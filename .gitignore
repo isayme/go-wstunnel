@@ -14,7 +14,7 @@
 vendor
 coverage
 
-dist/*
+dist
 !dist/Dockerfile
 
 swagger.json

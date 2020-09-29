@@ -15,16 +15,10 @@ import (
 	"golang.org/x/net/websocket"
 )
 
-var showHelp = flag.Bool("h", false, "show help")
 var showVersion = flag.Bool("v", false, "show version")
 
 func main() {
 	flag.Parse()
-
-	if *showHelp {
-		flag.Usage()
-		os.Exit(0)
-	}
 
 	if *showVersion {
 		wstunnel.PrintVersion()
@@ -34,7 +28,7 @@ func main() {
 	config := conf.Get()
 
 	if len(config.Services) == 0 {
-		logger.Warnw("not service configured")
+		logger.Warnw("no service configured")
 		os.Exit(0)
 	}
 
@@ -72,6 +66,9 @@ func NewClient(wsAddr string, config conf.ServiceConfig) (*Client, error) {
 		timeout:       config.Timeout.Duration(),
 		listenAddress: config.LocalAddress,
 		wsAddress:     wsAddr,
+	}
+	if client.timeout <= 0 {
+		client.timeout = time.Second * 60
 	}
 
 	URL, err := url.Parse(client.wsAddress)
