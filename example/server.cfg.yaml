@@ -1,0 +1,13 @@
+logger:
+  # log level
+  level: debug
+
+server:
+  # wstunnel server listen address, wstunnel connect to this address
+  addr: "127.0.0.1:10001"
+
+services:
+  # support proxy service
+  - name: tcpbin
+    # real tcpbin service address
+    remote_addr: "52.20.16.20:30000"

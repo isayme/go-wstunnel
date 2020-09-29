@@ -1,0 +1,13 @@
+logger:
+  # log level
+  level: debug
+
+local:
+  # ws proxy server, create by wstunnerl server
+  ws_addr: "ws://127.0.0.1:10001"
+
+services:
+  # proxy service
+  - name: tcpbin
+    # local listen address, access this address instead of real tcpbin server address.
+    local_addr: ":8080"
