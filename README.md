@@ -1,6 +1,13 @@
 # Websocket Tunnel
 
-Proxy a TCP protocol with websocket
+Proxy a TCP protocol with websocket.
+HTTP/HTTPS protocol not supported.
+
+# Why or When
+
+- proxy server that cannot reach directly, like socks5 but no client proxy config;
+- access server with wss to avoid Man-in-the-middle attack;
+- use cloudflare to protect/hide real server;
 
 # How it works
 
