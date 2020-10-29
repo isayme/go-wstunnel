@@ -1,6 +1,7 @@
 name: Build Docker Image
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - v*
@@ -25,7 +26,10 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Generate App Version
-        run: echo APP_VERSION=`git describe --tags --always | sed "s/v//"` >> $GITHUB_ENV
+        run: |
+          echo APP_VERSION=`git describe --tags --always | sed "s/v//"` >> $GITHUB_ENV
+          echo BUILD_TIME=`date -u +"%FT%TZ"` >> $GITHUB_ENV
+          echo GIT_REVISION=`git rev-parse HEAD` >> $GITHUB_ENV
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
@@ -40,6 +44,8 @@ jobs:
           build-args: |
             APP_NAME=${{ env.APP_NAME }}
             APP_VERSION=${{ env.APP_VERSION }}
+            BUILD_TIME=${{ env.BUILD_TIME }}
+            GIT_REVISION=${{ env.GIT_REVISION }}
           tags: |
             ${{ env.DOCKERHUB_REPO }}:${{ env.APP_VERSION }}
             ${{ env.DOCKERHUB_REPO }}:latest
