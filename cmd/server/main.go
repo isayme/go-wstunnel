@@ -58,11 +58,11 @@ func getServiceName(ws *websocket.Conn) string {
 
 func handleWebsocket(targets map[string]string) func(*websocket.Conn) {
 	return func(ws *websocket.Conn) {
-		logger.Debugw("new connection", "address", ws.RemoteAddr().String())
 		defer ws.Close()
 
 		serviceName := getServiceName(ws)
 		address := targets[serviceName]
+		logger.Debugw("new connection", "address", ws.RemoteAddr().String(), "serviceName", serviceName, "address", address)
 		if address == "" {
 			logger.Debugf("service(%s) not found", serviceName)
 			return
@@ -70,7 +70,7 @@ func handleWebsocket(targets map[string]string) func(*websocket.Conn) {
 
 		conn, err := net.Dial("tcp", address)
 		if err != nil {
-			logger.Warnw("dial ssserver fail", "err", err)
+			logger.Warnw("dial service fail", "err", err)
 			return
 		}
 		defer conn.Close()
