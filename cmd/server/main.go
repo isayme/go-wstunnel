@@ -1,11 +1,9 @@
-package main
+package server
 
 import (
-	"flag"
 	"fmt"
 	"net"
 	"net/http"
-	"os"
 
 	logger "github.com/isayme/go-logger"
 	"github.com/isayme/go-wstunnel/wstunnel"
@@ -13,15 +11,7 @@ import (
 	"golang.org/x/net/websocket"
 )
 
-var showVersion = flag.Bool("v", false, "show version")
-
-func main() {
-	flag.Parse()
-	if *showVersion {
-		wstunnel.PrintVersion()
-		os.Exit(0)
-	}
-
+func Run() {
 	config := conf.Get()
 
 	targets := map[string]string{}

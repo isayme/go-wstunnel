@@ -1,7 +1,6 @@
-package main
+package local
 
 import (
-	"flag"
 	"fmt"
 	"net"
 	"net/url"
@@ -15,16 +14,7 @@ import (
 	"golang.org/x/net/websocket"
 )
 
-var showVersion = flag.Bool("v", false, "show version")
-
-func main() {
-	flag.Parse()
-
-	if *showVersion {
-		wstunnel.PrintVersion()
-		os.Exit(0)
-	}
-
+func Run() {
 	config := conf.Get()
 
 	if len(config.Services) == 0 {
