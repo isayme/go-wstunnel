@@ -98,7 +98,7 @@ func (c *Client) ListenAndServe() error {
 }
 
 func (c *Client) handleConnection(conn net.Conn) {
-	logger.Debugw("new connection", "address", conn.RemoteAddr().String())
+	logger.Debugw("new connection", "serviceName", c.name, "address", conn.RemoteAddr().String())
 	conn = wstunnel.NewTimeoutConn(conn, c.timeout)
 	defer conn.Close()
 
