@@ -1,4 +1,8 @@
-# Websocket Tunnel
+# (Deprecated) Websocket Tunnel
+
+[![Docker Image Version (latest semver)](https://img.shields.io/docker/v/isayme/wstunnel?sort=semver&style=flat-square)](https://hub.docker.com/r/isayme/wstunnel)
+![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/isayme/wstunnel?sort=semver&style=flat-square)
+![Docker Pulls](https://img.shields.io/docker/pulls/isayme/wstunnel?style=flat-square)
 
 Proxy a TCP protocol with websocket.
 HTTP/HTTPS protocol not supported.
@@ -9,25 +13,7 @@ HTTP/HTTPS protocol not supported.
 - access server with wss to avoid Man-in-the-middle attack;
 - use cloudflare to protect/hide real server;
 
-# How it works
-
-## If not use wstunnel
-
-![before](./doc/before.png)
-
-## If use wstunnel
-
-![after](./doc/after.png)
-
 # Example Configure
 
 - [server](./example/server.cfg.yaml)
 - [local](./example/local.cfg.yaml)
-
-```
-> # start server
-> CONF_FILE_PATH=./example/server.cfg.yaml go run cmd/server/main.go
-
-> # start local
-> CONF_FILE_PATH=./example/local.cfg.yaml go run cmd/local/main.go
-```

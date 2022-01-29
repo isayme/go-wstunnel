@@ -7,8 +7,8 @@ on:
       - v*
 
 env:
-  APP_NAME: go-wstunnel
-  DOCKERHUB_REPO: isayme/go-wstunnel
+  APP_NAME: wstunnel
+  DOCKERHUB_REPO: isayme/wstunnel
 
 jobs:
   main:
